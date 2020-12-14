@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.db.models import Q
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework import exceptions, status
 from rest_framework.response import Response
-
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from .serializers import RegisterSerializer
 from .helper import generate_access_token, JWTauthentication
 
@@ -21,11 +22,10 @@ def register_view(request, *args, **kwargs):
     serializer.is_valid(raise_exception=True)
     serializer.save()
     return Response(
-        {'data': serializer.data}, 
-        status=status.HTTP_201_CREATED
+        serializer.data
         )
 
-api_view(['POST'])
+@api_view(["POST"])
 def login_view(request, *args, **kwargs):
     if request.user.is_authenticated:
         return Response({'Message': 'You are already logged in ...'}, status=400)

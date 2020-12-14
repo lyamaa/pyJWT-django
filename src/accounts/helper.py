@@ -8,6 +8,7 @@ from rest_framework import exceptions
 User = get_user_model()
 
 
+
 def generate_access_token(user, *args, **kwargs):
 
     payload = {
@@ -15,7 +16,7 @@ def generate_access_token(user, *args, **kwargs):
         "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
         "iat": datetime.datetime.utcnow(),
     }
-    return jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256").decode("utf-8")
+    return jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256').decode("utf-8")
 
 
 class JWTauthentication(BaseAuthentication):
