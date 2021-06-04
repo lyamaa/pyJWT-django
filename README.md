@@ -1,5 +1,5 @@
 # pyJWT-django
-Example on how to use PyJWT library on DRF with JWTAUTHENTICATION
+Example on how to use JWT HTTP ONLY COOKIES
 ***
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install required library.
